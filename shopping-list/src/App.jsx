@@ -22,7 +22,18 @@ export default function App() {
       <h1>Shopping List</h1>
       <div className="shopping-list">
         <h2>Items to Buy</h2>
-        
+        <form onSubmit={onSubmit}>
+          <input
+            type="text"
+            name="item"
+            placeholder="Add a new item"
+            required
+          />
+          <button className="button">Add</button>
+        </form>
+        {items.map((item, index) => (
+          <Item onRemoveItem={onRemoveItem} key={item + index} item={item} />
+        ))}
       </div>
     </>
   );
