@@ -33,7 +33,7 @@ export default function App() {
         </form>
         {items.map((item, index) => (
           <Item onRemoveItem={onRemoveItem} key={item + index} item={item} />
-        ))}
+        ))}0
       </div>
     </>
   );
