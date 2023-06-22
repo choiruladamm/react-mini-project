@@ -40,13 +40,3 @@ li {
   justify-content: space-between;
   width: 200px;
 }
-
-input {
-  padding: 5px;
-}
-
-.button {
-  padding: 5px 15px;
-  border: none;
-  margin: 10px;
-}
