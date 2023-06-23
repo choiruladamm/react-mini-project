@@ -2,10 +2,19 @@
 /* eslint-disable no-unused-vars */
 
 import { useState } from "react";
+import Button from "./Button";
 
 const ItemComponent = ({ item, onRemoveItem, onUpdateItem }) => {
   const [editMode, setEditMode] = useState(false);
   const [editedItem, setEditedItem] = useState(item);
+
+  const handleEdit = () => {
+    setEditMode(true);
+  };
+
+  const handleChange = (event) => {
+    setEditedItem(event.target.value);
+  };
 
   const handleSave = () => {
     onUpdateItem(item, editedItem);
@@ -22,64 +31,24 @@ const ItemComponent = ({ item, onRemoveItem, onUpdateItem }) => {
       {!editMode && (
         <>
           {item}
-          <button
-            style={{
-              background: "transparent",
-              border: "none",
-              color: "red",
-              fontWeight: "bold",
-              fontSize: "1rem",
-            }}
-            onClick={() => onRemoveItem(item)}
-          >
+          <Button color="red" onClick={() => onRemoveItem(item)}>
             X
-          </button>
-          <button
-            style={{
-              background: "transparent",
-              border: "none",
-              color: "blue",
-              fontWeight: "bold",
-              fontSize: "1rem",
-            }}
-            onClick={() => setEditMode(true)}
-          >
+          </Button>
+          <Button color="blue" onClick={handleEdit}>
             Edit
-          </button>
+          </Button>
         </>
       )}
 
       {editMode && (
         <>
-          <input
-            type="text"
-            value={editedItem}
-            onChange={(e) => setEditedItem(e.target.value)}
-          />
-          <button
-            style={{
-              background: "transparent",
-              border: "none",
-              color: "green",
-              fontWeight: "bold",
-              fontSize: "1rem",
-            }}
-            onClick={handleSave}
-          >
+          <input type="text" value={editedItem} onChange={handleChange} />
+          <Button color="green" onClick={handleSave}>
             Save
-          </button>
-          <button
-            style={{
-              background: "transparent",
-              border: "none",
-              color: "red",
-              fontWeight: "bold",
-              fontSize: "1rem",
-            }}
-            onClick={handleCancel}
-          >
+          </Button>
+          <Button color="red" onClick={handleCancel}>
             Cancel
-          </button>
+          </Button>
         </>
       )}
     </li>

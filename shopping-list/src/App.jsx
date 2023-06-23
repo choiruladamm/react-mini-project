@@ -14,7 +14,7 @@ const App = () => {
   };
 
   const onUpdateItem = (itemToUpdate, newItem) => {
-    const updatedItems = items.filter((item) => {
+    const updatedItems = items.map((item) => {
       if (item === itemToUpdate) {
         return newItem;
       }
