@@ -1,13 +1,11 @@
 /* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
+
 import { useState } from "react";
 
 const ItemComponent = ({ item, onRemoveItem, onUpdateItem }) => {
   const [editMode, setEditMode] = useState(false);
   const [editedItem, setEditedItem] = useState(item);
-
-  const handleEdit = () => {
-    setEditMode(true);
-  };
 
   const handleSave = () => {
     onUpdateItem(item, editedItem);
@@ -17,10 +15,6 @@ const ItemComponent = ({ item, onRemoveItem, onUpdateItem }) => {
   const handleCancel = () => {
     setEditMode(false);
     setEditedItem(item);
-  };
-
-  const handleChange = (event) => {
-    setEditedItem(event.target.value);
   };
 
   return (
@@ -48,7 +42,7 @@ const ItemComponent = ({ item, onRemoveItem, onUpdateItem }) => {
               fontWeight: "bold",
               fontSize: "1rem",
             }}
-            onClick={handleEdit}
+            onClick={() => setEditMode(true)}
           >
             Edit
           </button>
@@ -57,7 +51,11 @@ const ItemComponent = ({ item, onRemoveItem, onUpdateItem }) => {
 
       {editMode && (
         <>
-          <input type="text" value={editedItem} onChange={handleChange} />
+          <input
+            type="text"
+            value={editedItem}
+            onChange={(e) => setEditedItem(e.target.value)}
+          />
           <button
             style={{
               background: "transparent",

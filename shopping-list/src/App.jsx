@@ -14,7 +14,7 @@ const App = () => {
   };
 
   const onUpdateItem = (itemToUpdate, newItem) => {
-    const updatedItems = items.map((item) => {
+    const updatedItems = items.filter((item) => {
       if (item === itemToUpdate) {
         return newItem;
       }
@@ -38,22 +38,17 @@ const App = () => {
       <div className="shopping-list">
         <h2>Items to Buy</h2>
         <form onSubmit={onSubmit}>
-          <input
-            type="text"
-            name="item"
-            placeholder="Add a New Item"
-            required
-          />
+          <input type="text" name="item" placeholder="Add New Items" required />
           <button>Add</button>
         </form>
 
         <ul>
           {items.map((item, index) => (
             <ItemComponent
+              item={item}
+              key={index + item}
               onRemoveItem={onRemoveItem}
               onUpdateItem={onUpdateItem}
-              key={index + item}
-              item={item}
             />
           ))}
         </ul>
