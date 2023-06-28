@@ -3,6 +3,9 @@
 import React, { useState } from "react";
 import ErrorMessage from "./components/errorMessage";
 import Loader from "./components/Loader";
+import CardList from "./components/CardList";
+import Button from "./components/Button";
+import InputForm from "./components/InputForm";
 
 const App = () => {
   const [query, setQuery] = useState("");
@@ -34,43 +37,17 @@ const App = () => {
   return (
     <div className="font-[Inter] grid place-items-center mx-3">
       <form onSubmit={handleSearch}>
-        <div className="flex gap-5 mt-20">
-          <input
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full p-2.5 "
-          />
-          <button
-            type="submit"
-            className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-300 font-medium rounded-md text-sm px-5 py-2.5"
-          >
-            Search
-          </button>
+        <div className="flex gap-5 mt-20 maxw">
+          <InputForm query={query} onChange={(e) => setQuery(e.target.value)} />
+          <Button type="submit">Search</Button>
         </div>
-
+        
         {error && <ErrorMessage>{error}</ErrorMessage>}
         {loading && <Loader />}
 
         <ul>
           {results.map((user) => (
-            <li key={user.id}>
-              <div className="flex items-center gap-5 bg-gray-50 border border-gray-300 px-5 py-3 mt-5 rounded-md">
-                <img
-                  src={user.avatar_url}
-                  alt={user.login}
-                  className="rounded-full h-14 w-14"
-                />
-                <a
-                  href={user.html_url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="font-bold"
-                >
-                  {user.login}
-                </a>
-              </div>
-            </li>
+            <CardList key={user.id} user={user} />
           ))}
         </ul>
       </form>
