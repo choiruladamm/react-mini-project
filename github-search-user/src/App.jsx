@@ -38,10 +38,10 @@ const App = () => {
     <div className="font-[Inter] grid place-items-center mx-3">
       <form onSubmit={handleSearch}>
         <div className="flex gap-5 mt-20 maxw">
-          <InputForm query={query} onChange={(e) => setQuery(e.target.value)} />
+          <InputForm value={query} onChange={(e) => setQuery(e.target.value)} />
           <Button type="submit">Search</Button>
         </div>
-        
+
         {error && <ErrorMessage>{error}</ErrorMessage>}
         {loading && <Loader />}
 

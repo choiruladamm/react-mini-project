@@ -14,7 +14,7 @@ const CardList = ({ user }) => {
           href={user.html_url}
           target="_blank"
           rel="noreferrer"
-          className="font-bold"
+          className="font-bold text-lg text-sky-500 underline italic"
         >
           {user.login}
         </a>
