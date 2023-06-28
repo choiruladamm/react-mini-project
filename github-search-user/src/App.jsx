@@ -30,6 +30,7 @@ const App = () => {
       setLoading(false);
     } else {
       setResults(data.items);
+      console.log(data.items);
       setLoading(false);
     }
   };
