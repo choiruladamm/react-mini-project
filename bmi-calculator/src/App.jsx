@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 
 import { useMemo, useState } from "react";
+import Label from "./components/Label";
+import Slider from "./components/Slider";
 
 const DEFAULT_WEIGHT = 50;
 const DEFAULT_HEIGHT = 150;
@@ -16,13 +18,13 @@ const App = () => {
 
   const getWeightStatus = (bmi) => {
     if (bmi < 18.5) {
-      return "Underweight";
+      return <span className="italic text-yellow-300">(Under Weight)</span>;
     } else if (bmi >= 18.5 && bmi <= 24.9) {
-      return "Healthy Weight";
+      return <span className="italic text-green-400">(Healthy Weight)</span>;
     } else if (bmi >= 25.0 && bmi <= 29.9) {
-      return "Overweight";
+      return <span className="italic text-red-400">(Over Weight)</span>;
     } else {
-      return "Obesity";
+      return <span className="italic text-red-700">(Obesity)</span>;
     }
   };
 
@@ -39,33 +41,19 @@ const App = () => {
 
         <div className="content px-10 py-7 w-[25rem]">
           {/* Weight Slider */}
-          <label
-            htmlFor="minmax-range"
-            className="block mb-2 text-base font-medium text-gray-900"
-          >
-            Weight : {weight}
-          </label>
-          <input
+          <Label>Weight : {weight}</Label>
+          <Slider
+            min={40}
+            max={220}
             onChange={(e) => setWeight(e.target.value)}
-            type="range"
-            min="40"
-            max="220"
-            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer "
           />
 
           {/* Height Slider */}
-          <label
-            htmlFor="minmax-range"
-            className="block mb-2 text-base font-medium text-gray-900 mt-5"
-          >
-            Height : {height}
-          </label>
-          <input
+          <Label className="mt-5">Height : {height}</Label>
+          <Slider
+            min={150}
+            max={220}
             onChange={(e) => setHeight(e.target.value)}
-            type="range"
-            min="150"
-            max="220"
-            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer "
           />
 
           {/* Output */}
@@ -73,7 +61,7 @@ const App = () => {
             Your BMI Is
             <br />
             <div className="output bg-slate-900 inline-block text-white font-bold px-6 py-2 rounded-md mt-2">
-              {output} <span className="italic">({weightStatus})</span>
+              {output} {weightStatus}
             </div>
           </div>
         </div>
