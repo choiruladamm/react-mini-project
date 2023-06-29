@@ -61,6 +61,7 @@ const App = () => {
             className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer "
           />
 
+          {/* Output */}
           <div className="container-output text-base font-medium text-gray-900 mt-5 text-center">
             Your BMI Is
             <br />
