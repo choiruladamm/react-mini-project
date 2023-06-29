@@ -9,21 +9,28 @@ const App = () => {
   const [height, setHeight] = useState(DEFAULT_HEIGHT);
   const [weight, setWeight] = useState(DEFAULT_WEIGHT);
 
-  const onWeightChange = (event) => {
-    const inputWeight = event.target.value;
-    setWeight(inputWeight);
-    console.log(inputWeight);
+  const output = useMemo(() => {
+    const calculatedHeight = height / 100;
+    return (weight / (calculatedHeight * calculatedHeight)).toFixed(1);
+  }, [weight, height]);
+
+  const getWeightStatus = (bmi) => {
+    if (bmi < 18.5) {
+      return "Underweight";
+    } else if (bmi >= 18.5 && bmi <= 24.9) {
+      return "Healthy Weight";
+    } else if (bmi >= 25.0 && bmi <= 29.9) {
+      return "Overweight";
+    } else {
+      return "Obesity";
+    }
   };
 
-  const output = useMemo(() => {
-    const calculatedHeight = height / 100
-    return (weight / (calculatedHeight * calculatedHeight)).toFixed(1)
-  }, [weight, height])
+  const weightStatus = getWeightStatus(output);
 
   return (
     <div className="h-screen grid place-items-center">
       <div className="card max-w-lg bg-gray-50 border border-gray-300 rounded-lg">
-        
         <div className="heading py-5 bg-slate-900 rounded-t-lg grid place-items-center">
           <p className="text-white font-extrabold text-2xl tracking-tight">
             BMI CALCULATOR
@@ -66,10 +73,9 @@ const App = () => {
             Your BMI Is
             <br />
             <div className="output bg-slate-900 inline-block text-white font-bold px-6 py-2 rounded-md mt-2">
-              {output}
+              {output} <span className="italic">({weightStatus})</span>
             </div>
           </div>
-
         </div>
       </div>
     </div>
