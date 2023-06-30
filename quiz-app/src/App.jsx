@@ -1,11 +1,12 @@
 /* eslint-disable no-unused-vars */
 
 import { useEffect, useState } from "react";
-import "./App.css";
 
 const App = () => {
   // all quiz
   const [quizs, setQuizs] = useState([]);
+  const [question, setQuestion] = useState({});
+  const [questionIndex, setQuestionIndex] = useState(0);
 
   // displaying controller
   const [showStart, setShowStart] = useState(true);
@@ -26,6 +27,13 @@ const App = () => {
     setShowStart(false);
     setShowQuiz(true);
   };
+
+  // set a single question
+  useEffect(() => {
+    if (quizs.length > questionIndex) {
+      setQuestion(quizs[questionIndex]);
+    }
+  }, [quizs, questionIndex]);
 
   return (
     <>
@@ -50,6 +58,26 @@ const App = () => {
       </section>
 
       {/* quiz page */}
+      <section
+        className="bg-dark text-white"
+        style={{ display: `${showQuiz ? "block" : "none"}` }}
+      >
+        <div className="container">
+          <div className="row vh-100 align-items-center justify-content-center">
+            <div className="col-lg-8">
+              <div
+                className="card p-4"
+                style={{ background: "#3d3d3d", borderColor: "#646464" }}
+              >
+                <div className="d-flex justify-content-between gap-md-3">
+                  <h5 className="mb-2 fs-normal lh-base text-white">{question?.question}</h5>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 };
