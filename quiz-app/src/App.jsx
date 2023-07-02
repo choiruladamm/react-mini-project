@@ -7,10 +7,14 @@ const App = () => {
   const [quizs, setQuizs] = useState([]);
   const [question, setQuestion] = useState({});
   const [questionIndex, setQuestionIndex] = useState(0);
+  const [correctAnswer, setCorrectAnswer] = useState("");
+  const [selectedAnswer, setSelectedAnswer] = useState("");
+  const [marks, setMarks] = useState(false);
 
-  // displaying controller
+  // displaying controlling states
   const [showStart, setShowStart] = useState(true);
   const [showQuiz, setShowQuiz] = useState(false);
+  const [showResult, setshowResult] = useState(false);
 
   // load data json
   useEffect(() => {
@@ -22,18 +26,54 @@ const App = () => {
       });
   }, []);
 
-  // start quiz
-  const startQuiz = () => {
-    setShowStart(false);
-    setShowQuiz(true);
-  };
-
   // set a single question
   useEffect(() => {
     if (quizs.length > questionIndex) {
       setQuestion(quizs[questionIndex]);
     }
   }, [quizs, questionIndex]);
+
+  // start quiz
+  const startQuiz = () => {
+    setShowStart(false);
+    setShowQuiz(true);
+  };
+
+  // check answer
+  const checkAnswer = (event, selected) => {
+    if (!selectedAnswer) {
+      setCorrectAnswer(question.answer);
+      setSelectedAnswer(selected);
+
+      if (selected === question.answer) {
+        event.target.classList.add("bg-succes");
+        setMarks(marks + 5);
+      } else {
+        event.target.classList.add("bg-danger");
+      }
+    }
+  };
+
+  // next question
+  const nextQuestion = () => {
+    setCorrectAnswer("");
+    setSelectedAnswer("");
+
+    const wrongBtn = document.querySelector("button.bg-danger");
+    wrongBtn?.classList.remove("bg-danger");
+    const rightBtn = document.querySelector("button.bg-danger");
+    rightBtn?.classList.remove("bg-success");
+    setQuestionIndex(questionIndex + 1);
+  };
+
+  // show result question
+  const showTheResult = () => {
+    setshowResult(true);
+    setShowStart(false);
+    setShowQuiz(false);
+  };
+
+
 
   return (
     <>
@@ -69,15 +109,64 @@ const App = () => {
                 className="card p-4"
                 style={{ background: "#3d3d3d", borderColor: "#646464" }}
               >
+                {/* question */}
                 <div className="d-flex justify-content-between gap-md-3">
-                  <h5 className="mb-2 fs-normal lh-base text-white">{question?.question}</h5>
-                  
+                  <h5 className="mb-2 fs-normal lh-base text-white">
+                    {question?.question}
+                  </h5>
+                  <h5
+                    style={{
+                      color: "#60d600",
+                      width: "100px",
+                      textAlign: "right",
+                    }}
+                  >
+                    {quizs.indexOf(question) + 1} / {quizs?.length}
+                  </h5>
                 </div>
+
+                {/* list answer */}
+                <div>
+                  {question?.options?.map((item, index) => (
+                    <button
+                      key={index}
+                      className={`option w-100 text-start btn text-white py-2 px-3 mt-3 rounded btn-dark ${
+                        correctAnswer === item && "bg-success"
+                      }`}
+                      onClick={(event) => checkAnswer(event, item)}
+                    >
+                      {item}
+                    </button>
+                  ))}
+                </div>
+
+                {/* button next question */}
+                {questionIndex + 1 !== quizs.length ? (
+                  <button
+                    className="btn py-2 w-100 mt-3 bg-primary text-light fw-bold"
+                    onClick={nextQuestion}
+                    disabled={!selectedAnswer}
+                  >
+                    Next Question
+                  </button>
+                ) : (
+                  <button
+                    className="btn py-2 w-100 mt-3 bg-primary text-light fw-bold"
+                    onClick={showTheResult}
+                    disabled={!selectedAnswer}
+                  >
+                    Show Result
+                  </button>
+                )}
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      {/* result question */}
+      
+
     </>
   );
 };
