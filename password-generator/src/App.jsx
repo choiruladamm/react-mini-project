@@ -8,6 +8,7 @@ import { BsFillClipboardFill } from "react-icons/bs";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { COPY_FAIL, COPY_SUCCESS } from "./constant/message";
+import { numbers, upperCaseLetters, lowerCaseLetters, specialCharacters } from "./constant/character";
 
 const App = () => {
   const [password, setPassword] = useState("");
@@ -17,7 +18,38 @@ const App = () => {
   const [includeNumbers, setIncludeNumbers] = useState(false);
   const [includeSymbols, setincludeSymbols] = useState(false);
 
-  const handleGeneratePassword = () => {};
+  const handleGeneratePassword = () => {
+    if (!includeUpperCase && !includeLowerCase && !includeNumbers && !includeSymbols) {
+      notify('to generate password, you must be select atleast one checkbox', true)
+    } else {
+      let characterList = ""
+      if (includeNumbers) {
+        characterList = characterList + numbers
+      } 
+      if (includeUpperCase) {
+        characterList = characterList + upperCaseLetters
+      }
+      if (includeLowerCase) {
+        characterList = characterList + lowerCaseLetters
+      }
+      if (includeSymbols) {
+        characterList = characterList + specialCharacters
+      }
+      setPassword(createPassword(characterList))
+      notify("password is generated succesfully", false)
+    }
+  };
+
+  const createPassword = (characterList) => {
+    let password = ""
+    const characterListLength = characterList.length
+
+    for(let i = 0; i < passwordLength; i++) {
+      const characterIndex = Math.round(Math.random() * characterListLength)
+      password = password + characterList.charAt(characterIndex)
+    }
+    return password
+  }
 
   const copyToClipboard = (password) => {
     navigator.clipboard.writeText(password);
@@ -76,7 +108,7 @@ const App = () => {
           <input
             type="text"
             defaultValue={passwordLength}
-            onChange={() => {}}
+            onChange={(e) => setPasswordLength(e.target.value)}
             max={26}
             min={8}
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md w-12 p-2 text-center"
