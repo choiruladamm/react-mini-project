@@ -4,6 +4,7 @@ import Label from "./components/Label";
 import Checkbox from "./components/Checkbox";
 
 import { BsFillClipboardFill } from "react-icons/bs";
+import Button from "./components/Button";
 
 const App = () => {
   return (
@@ -12,7 +13,7 @@ const App = () => {
         <h1 className="font-bold text-xl text-center">Password generator</h1>
 
         {/* ouput password */}
-        <div className="output w-full mt-4 bg-slate-900 py-2 px-4 flex justify-between items-center">
+        <div className="output w-full mt-4 bg-slate-900 py-2 px-4 flex justify-between items-center rounded-md">
           <span className="text-white font-medium text-sm">
             bxoYKrCANqgJyBvTVPaxlZjftIvgJED
           </span>
@@ -23,8 +24,6 @@ const App = () => {
         </div>
 
         {/* password length */}
-
-        {/* checkbox */}
         <div className="mt-4 flex justify-between items-center">
           <Label>Password Length</Label>
           <input
@@ -36,6 +35,8 @@ const App = () => {
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md w-12 p-2 text-center"
           />
         </div>
+
+        {/* checkbox */}
         <div className="flex items-center mb-4 mt-4">
           <Checkbox />
           <Label>Add Uppercase Letters</Label>
@@ -52,6 +53,9 @@ const App = () => {
           <Checkbox />
           <Label>Include symbols</Label>
         </div>
+
+        {/* button */}
+        <Button>Generate Password</Button>
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ const Checkbox = ({ checked, onChange }) => {
       type="checkbox"
       checked={checked}
       onChange={onChange}
-      className="w-4 h-4 mr-2 bg-slate-900 border-slate-900 rounded"
+      className="w-4 h-4 mr-2 bg-slate-900 border-slate-900 rounded cursor-pointer"
     />
   );
 };
