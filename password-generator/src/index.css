@@ -1,7 +1,14 @@
-@import url('https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900');
+@import url("https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900");
 
 @layer base {
   html {
-    font-family: 'Inter';
+    font-family: "Inter";
   }
+}
+
+.copy__btn {
+  color: #fff;
+  background: #308d46;
+  border: none;
+  cursor: pointer;
 }
