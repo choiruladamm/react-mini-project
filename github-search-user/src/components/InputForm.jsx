@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-const InputForm = ({ value, onChange }) => {
+export const InputForm = ({ value, onChange }) => {
   return (
     <input
       type="text"
@@ -11,4 +11,3 @@ const InputForm = ({ value, onChange }) => {
   );
 };
 
-export default InputForm;

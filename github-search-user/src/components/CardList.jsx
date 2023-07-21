@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 
-const CardList = ({ user }) => {
+export const CardList = ({ user }) => {
   return (
     <li key={user.id}>
-      <div className="flex items-center gap-5 bg-gray-50 border border-gray-300 px-5 py-3 mt-5 rounded-md">
+      <div className="flex items-center gap-5 px-5 py-3 mt-5 border border-gray-300 rounded-md bg-gray-50">
         <img
           src={user.avatar_url}
           alt={user.login}
@@ -14,7 +14,7 @@ const CardList = ({ user }) => {
           href={user.html_url}
           target="_blank"
           rel="noreferrer"
-          className="font-bold text-lg hover:text-sky-600 hover:underline"
+          className="text-lg font-bold hover:text-sky-600 hover:underline"
         >
           {user.login}
         </a>
@@ -23,4 +23,3 @@ const CardList = ({ user }) => {
   );
 };
 
-export default CardList;

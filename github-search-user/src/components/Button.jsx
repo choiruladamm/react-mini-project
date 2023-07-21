@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 
-const Button = ({type, children}) => {
+export const Button = ({type, children}) => {
   return (
     <button
       type={type}
@@ -10,5 +10,3 @@ const Button = ({type, children}) => {
     </button>
   );
 };
-
-export default Button;

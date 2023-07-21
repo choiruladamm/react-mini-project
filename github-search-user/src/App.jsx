@@ -2,11 +2,13 @@
 /* eslint-disable no-unused-vars */
 
 import React, { useState } from "react";
-import ErrorMessage from "./components/errorMessage";
-import Loader from "./components/Loader";
-import CardList from "./components/CardList";
-import Button from "./components/Button";
-import InputForm from "./components/InputForm";
+import {
+  Button,
+  CardList,
+  ErrorMessage,
+  InputForm,
+  Loader,
+} from "./components";
 
 const App = () => {
   const [query, setQuery] = useState("");
