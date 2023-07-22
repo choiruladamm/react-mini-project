@@ -18,7 +18,10 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    // uploadcare
+    "types": ["@uploadcare/blocks/types/jsx"]
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
