@@ -9,12 +9,17 @@ import {
   InputForm,
   Loader,
 } from "./components";
+import { useEffect } from "react";
 
 const App = () => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    
+  }, [])
 
   const handleSearch = async (e) => {
     e.preventDefault();
